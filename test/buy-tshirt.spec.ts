@@ -1,18 +1,25 @@
 import { $, browser } from 'protractor';
+import { MenuContentPage, AddToCartContentPage, ProductListPage } from '../src/page';
 
 describe('Buy a t-shirt', () => {
+  const menuContentPage: MenuContentPage = new MenuContentPage();
+  const addressContentPage: AddToCartContentPage = new AddToCartContentPage();
+  const productListPage: ProductListPage = new ProductListPage();
   beforeEach(() => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 120000;
   });
 
   it('then should be bought a t-shirt', async () => {
     await browser.get('http://automationpractice.com/');
-    await(browser.sleep(10000));
-    await $('#block_top_menu > ul > li:nth-child(3) > a').click();
     await(browser.sleep(3000));
-    await $('#center_column a.button.ajax_add_to_cart_button.btn.btn-default').click();
+    await menuContentPage.goToTShirtMenu();
+    /** Clase de add to cart */
     await(browser.sleep(3000));
-    await $('[style*="display: block;"] .button-container > a').click();
+    await addressContentPage.goToTAdd();
+    /** Clase de Product list, ir a checkout */
+    await(browser.sleep(3000));
+    await productListPage.goToProductList();
+
     await(browser.sleep(3000));
     await $('.cart_navigation span').click();
     await(browser.sleep(3000));

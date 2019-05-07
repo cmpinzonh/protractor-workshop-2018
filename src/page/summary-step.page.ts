@@ -8,6 +8,8 @@ export class SummaryStep {
   }
 
   public async advance(): Promise<void> {
-    await this.summaryStep.getText();
+    let text;
+    text =  await this.summaryStep.getText();
+    return text;
   }
 }

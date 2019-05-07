@@ -1,38 +1,54 @@
 import { $, browser } from 'protractor';
+import { MenuContentPage, AddToCart, ProductList, OrderSummary,
+        SignInStep, AddressStep, ShippingStep,
+        BankPaymentStep, PaymentStep } from '../src/page';
 
 describe('Buy a t-shirt', () => {
+  const menuContentPage: MenuContentPage = new MenuContentPage();
+  const addToCart: AddToCart = new AddToCart();
+  const productList: ProductList = new ProductList();
+  const orderSummary: OrderSummary = new OrderSummary();
+  const signInStep: SignInStep = new SignInStep();
+  const addressStep: AddressStep = new AddressStep();
+  const shippingStep: ShippingStep = new ShippingStep();
+  const bankPaymentStep: BankPaymentStep = new BankPaymentStep();
+  const paymentStep: PaymentStep = new PaymentStep();
+
   beforeEach(() => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 120000;
   });
 
   it('then should be bought a t-shirt', async () => {
     await browser.get('http://automationpractice.com/');
-    await(browser.sleep(10000));
-    await $('#block_top_menu > ul > li:nth-child(3) > a').click();
     await(browser.sleep(3000));
-    await $('#center_column a.button.ajax_add_to_cart_button.btn.btn-default').click();
+
+    await menuContentPage.goToTShirtMenu();
     await(browser.sleep(3000));
-    await $('[style*="display: block;"] .button-container > a').click();
+
+    await addToCart.addToCart();
     await(browser.sleep(3000));
-    await $('.cart_navigation span').click();
+
+    await productList.advance();
+    await(browser.sleep(3000));
+
+    await orderSummary.advance();
     await(browser.sleep(3000));
 
     await $('#email').sendKeys('aperdomobo@gmail.com');
     await $('#passwd').sendKeys('WorkshopProtractor');
-    await $('#SubmitLogin > span').click();
+    await signInStep.advance();
     await(browser.sleep(3000));
 
-    await $('#center_column > form > p > button > span').click();
+    await addressStep.advance();
     await(browser.sleep(3000));
 
-    await $('#cgv').click();
+    await shippingStep.advance();
     await(browser.sleep(3000));
 
-    await $('#form > p > button > span').click();
+    await bankPaymentStep.advance();
     await(browser.sleep(3000));
-    await $('#HOOK_PAYMENT > div:nth-child(1) > div > p > a').click();
-    await(browser.sleep(3000));
-    await $('#cart_navigation > button > span').click();
+
+    await paymentStep.advance();
     await(browser.sleep(3000));
 
     await expect($('#center_column > div > p > strong').getText())

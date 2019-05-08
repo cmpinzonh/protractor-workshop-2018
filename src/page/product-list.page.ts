@@ -1,13 +1,13 @@
 import { $, ElementFinder } from 'protractor';
 
-export class ProductList {
-  private productList: ElementFinder;
+export class ProductListPage {
+  private productListButton: ElementFinder;
 
   constructor () {
-    this.productList = $('[style*="display: block;"] .button-container > a');
+    this.productListButton = $('[style*="display: block;"] .button-container > a');
   }
 
-  public async advance(): Promise<void> {
-    await this.productList.click();
+  public async goToCheckout(): Promise<void> {
+    await this.productListButton.click();
   }
 }

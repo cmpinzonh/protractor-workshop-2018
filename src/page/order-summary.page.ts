@@ -1,13 +1,13 @@
 import { $, ElementFinder } from 'protractor';
 
-export class OrderSummary {
-  private orderSummary: ElementFinder;
+export class OrderSummaryPage {
+  private orderSummaryButton: ElementFinder;
 
   constructor () {
-    this.orderSummary = $('.cart_navigation span');
+    this.orderSummaryButton = $('.cart_navigation span');
   }
 
-  public async advance(): Promise<void> {
-    await this.orderSummary.click();
+  public async proceedToCheckout(): Promise<void> {
+    await this.orderSummaryButton.click();
   }
 }

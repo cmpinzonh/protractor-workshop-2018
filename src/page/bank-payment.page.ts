@@ -1,13 +1,13 @@
 import { $, ElementFinder } from 'protractor';
 
-export class BankPaymentStep {
-  private bankPaymentStep: ElementFinder;
+export class BankPaymentStepPage {
+  private bankPaymentButton: ElementFinder;
 
   constructor () {
-    this.bankPaymentStep = $('#HOOK_PAYMENT > div:nth-child(1) > div > p > a');
+    this.bankPaymentButton = $('#HOOK_PAYMENT > div:nth-child(1) > div > p > a');
   }
 
-  public async advance(): Promise<void> {
-    await this.bankPaymentStep.click();
+  public async selectBankPayment(): Promise<void> {
+    await this.bankPaymentButton.click();
   }
 }

@@ -1,19 +1,19 @@
 import { $, browser } from 'protractor';
-import { MenuContentPage, AddToCart, ProductList, OrderSummary,
-        SignInStep, AddressStep, ShippingStep,
-        BankPaymentStep, PaymentStep, SummaryStep } from '../src/page';
+import { MenuContentPage, AddToCartPage, ProductListPage, OrderSummaryPage,
+        SignInStepPage, AddressStepPage, ShippingStepPage,
+        BankPaymentStepPage, PaymentStepPage, SummaryStepPage } from '../src/page';
 
 describe('Buy a t-shirt', () => {
   const menuContentPage: MenuContentPage = new MenuContentPage();
-  const addToCart: AddToCart = new AddToCart();
-  const productList: ProductList = new ProductList();
-  const orderSummary: OrderSummary = new OrderSummary();
-  const signInStep: SignInStep = new SignInStep();
-  const addressStep: AddressStep = new AddressStep();
-  const shippingStep: ShippingStep = new ShippingStep();
-  const bankPaymentStep: BankPaymentStep = new BankPaymentStep();
-  const paymentStep: PaymentStep = new PaymentStep();
-  const summaryStep: SummaryStep = new SummaryStep();
+  const addToCartPage: AddToCartPage = new AddToCartPage();
+  const productListPage: ProductListPage = new ProductListPage();
+  const orderSummaryPage: OrderSummaryPage = new OrderSummaryPage();
+  const signInStep: SignInStepPage = new SignInStepPage();
+  const addressStepPage: AddressStepPage = new AddressStepPage();
+  const shippingStepPage: ShippingStepPage = new ShippingStepPage();
+  const bankPaymentStepPage: BankPaymentStepPage = new BankPaymentStepPage();
+  const paymentStepPage: PaymentStepPage = new PaymentStepPage();
+  const summaryStep: SummaryStepPage = new SummaryStepPage();
 
   beforeEach(() => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 120000;
@@ -26,33 +26,33 @@ describe('Buy a t-shirt', () => {
     await menuContentPage.goToTShirtMenu();
     await(browser.sleep(3000));
 
-    await addToCart.addToCart();
+    await addToCartPage.addToCart();
     await(browser.sleep(3000));
 
-    await productList.advance();
+    await productListPage.goToCheckout();
     await(browser.sleep(3000));
 
-    await orderSummary.advance();
+    await orderSummaryPage.proceedToCheckout();
     await(browser.sleep(3000));
 
     await $('#email').sendKeys('aperdomobo@gmail.com');
     await $('#passwd').sendKeys('WorkshopProtractor');
-    await signInStep.advance();
+    await signInStep.signIn();
     await(browser.sleep(3000));
 
-    await addressStep.advance();
+    await addressStepPage.selectAddress();
     await(browser.sleep(3000));
 
-    await shippingStep.advance();
+    await shippingStepPage.selectShipping();
     await(browser.sleep(3000));
 
-    await bankPaymentStep.advance();
+    await bankPaymentStepPage.selectBankPayment();
     await(browser.sleep(3000));
 
-    await paymentStep.advance();
+    await paymentStepPage.confirmOrder();
     await(browser.sleep(3000));
 
-    await expect(summaryStep.advance())
+    expect(await summaryStep.confirmOrder())
       .toBe('Your order on My Store is complete.');
   });
 });

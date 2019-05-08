@@ -1,18 +1,18 @@
 import { $, ElementFinder, browser } from 'protractor';
 
-export class ShippingStep {
-  private shippingStep1: ElementFinder;
-  private shippingStep2: ElementFinder;
+export class ShippingStepPage {
+  private tosButton : ElementFinder;
+  private proceedButton: ElementFinder;
 
   constructor () {
-    this.shippingStep1 = $('#cgv');
+    this.tosButton = $('#cgv');
 
-    this.shippingStep2 = $('#form > p > button > span');
+    this.proceedButton = $('#form > p > button > span');
   }
 
-  public async advance(): Promise<void> {
-    await this.shippingStep1.click();
+  public async selectShipping(): Promise<void> {
+    await this.tosButton.click();
     await(browser.sleep(3000));
-    await this.shippingStep2.click();
+    await this.proceedButton.click();
   }
 }

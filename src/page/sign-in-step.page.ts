@@ -1,13 +1,13 @@
 import { $, ElementFinder } from 'protractor';
 
-export class SignInStep {
-  private signInStep: ElementFinder;
+export class SignInStepPage {
+  private signInButton: ElementFinder;
 
   constructor () {
-    this.signInStep = $('#SubmitLogin > span');
+    this.signInButton = $('#SubmitLogin > span');
   }
 
-  public async advance(): Promise<void> {
-    await this.signInStep.click();
+  public async signIn(): Promise<void> {
+    await this.signInButton.click();
   }
 }

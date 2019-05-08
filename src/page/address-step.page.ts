@@ -1,13 +1,13 @@
 import { $, ElementFinder } from 'protractor';
 
-export class AddressStep {
-  private addressStep: ElementFinder;
+export class AddressStepPage {
+  private addressStepButton: ElementFinder;
 
   constructor () {
-    this.addressStep = $('#center_column > form > p > button > span');
+    this.addressStepButton = $('#center_column > form > p > button > span');
   }
 
-  public async advance(): Promise<void> {
-    await this.addressStep.click();
+  public async selectAddress(): Promise<void> {
+    await this.addressStepButton.click();
   }
 }

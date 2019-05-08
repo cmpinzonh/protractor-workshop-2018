@@ -1,15 +1,13 @@
 import { $, ElementFinder } from 'protractor';
 
-export class SummaryStep {
-  private summaryStep: ElementFinder;
+export class SummaryStepPage {
+  private confirmOrderButton: ElementFinder;
 
   constructor () {
-    this.summaryStep = $('#center_column > div > p > strong');
+    this.confirmOrderButton = $('#center_column > div > p > strong');
   }
 
-  public async advance(): Promise<void> {
-    let text;
-    text =  await this.summaryStep.getText();
-    return text;
+  public async confirmOrder(): Promise<string> {
+    return this.confirmOrderButton.getText();
   }
 }

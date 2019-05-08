@@ -1,13 +1,13 @@
 import { $, ElementFinder } from 'protractor';
 
-export class PaymentStep {
-  private paymentStep: ElementFinder;
+export class PaymentStepPage {
+  private confirmOrderButton: ElementFinder;
 
   constructor () {
-    this.paymentStep = $('#cart_navigation > button > span');
+    this.confirmOrderButton = $('#cart_navigation > button > span');
   }
 
-  public async advance(): Promise<void> {
-    await this.paymentStep.click();
+  public async confirmOrder(): Promise<void> {
+    await this.confirmOrderButton.click();
   }
 }

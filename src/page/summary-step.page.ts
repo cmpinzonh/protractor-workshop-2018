@@ -1,13 +1,13 @@
 import { $, ElementFinder } from 'protractor';
 
 export class SummaryStepPage {
-  private confirmOrderButton: ElementFinder;
+  private confirmOrderText: ElementFinder;
 
   constructor () {
-    this.confirmOrderButton = $('#center_column > div > p > strong');
+    this.confirmOrderText = $('#center_column > div > p > strong');
   }
 
   public async confirmOrder(): Promise<string> {
-    return this.confirmOrderButton.getText();
+    return this.confirmOrderText.getText();
   }
 }

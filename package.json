@@ -20,7 +20,7 @@
     "test": "npm run test:headless",
     "test:local": "npm run build && protractor dist/protractor/local.config.js",
     "test:headless": "npm run build && protractor dist/protractor/headless.config.js",
-    "postinstall": "webdriver-manager update",
+    "postinstall": "webdriver-manager update --gecko false",
     "lint": "tslint --project tsconfig.json protractor/**/*.ts test/**/*.ts src/**/*.ts"
   },
   "repository": {

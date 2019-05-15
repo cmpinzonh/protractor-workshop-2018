@@ -1,4 +1,4 @@
-import { $, ElementFinder, browser } from 'protractor';
+import { $, ElementFinder, browser, ExpectedConditions } from 'protractor';
 
 export class ShippingStepPage {
   private acceptTermsButton: ElementFinder;
@@ -12,7 +12,14 @@ export class ShippingStepPage {
 
   public async selectShipping(): Promise<void> {
     await this.acceptTermsButton.click();
-    await(browser.sleep(3000));
+    await browser.wait(
+      ExpectedConditions.elementToBeSelected(
+        this.acceptTermsButton),
+      3000);
+    await browser.wait(
+      ExpectedConditions.elementToBeClickable(
+        this.proceedToCheckoutButton),
+      3000);
     await this. proceedToCheckoutButton.click();
   }
 }

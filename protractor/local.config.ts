@@ -10,7 +10,7 @@ export const config: Config = {
   },
   SELENIUM_PROMISE_MANAGER: false,
   onPrepare: () => {
-    browser.manage().timeouts().implicitlyWait(3000);
+    browser.manage().timeouts().implicitlyWait(0);
     reporter();
     browser.ignoreSynchronization = true;
   }

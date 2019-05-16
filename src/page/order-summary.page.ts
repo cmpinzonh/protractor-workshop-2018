@@ -4,7 +4,9 @@ export class OrderSummaryPage {
   private orderSummaryButton: ElementFinder;
 
   constructor () {
-    this.orderSummaryButton = $('.cart_navigation span');
+    // this.orderSummaryButton = $('.cart_navigation span');
+    // Selector propuesto
+    this.orderSummaryButton = $('.btn.btn-default.button.standard-checkout');
   }
 
   public async proceedToCheckout(): Promise<void> {

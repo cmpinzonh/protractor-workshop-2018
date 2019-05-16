@@ -4,7 +4,9 @@ export class SignInStepPage {
   private signInButton: ElementFinder;
 
   constructor () {
-    this.signInButton = $('#SubmitLogin > span');
+    // this.signInButton = $('#SubmitLogin > span');
+    // Selector propuesto
+    this.signInButton = $('#SubmitLogin');
   }
 
   public async signIn(): Promise<void> {

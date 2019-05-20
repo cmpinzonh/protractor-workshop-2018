@@ -7,8 +7,6 @@ export class ShippingStepPage {
   constructor () {
     this.acceptTermsButton = $('#cgv');
 
-    // this.proceedToCheckoutButton = $('#form > p > button > span');
-    // Selector propuesto
     this.proceedToCheckoutButton = $('.cart_navigation .btn.standard-checkout');
   }
 

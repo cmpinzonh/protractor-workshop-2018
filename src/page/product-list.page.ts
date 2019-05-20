@@ -4,8 +4,6 @@ export class ProductListPage {
   private productListButton: ElementFinder;
 
   constructor () {
-    // this.productListButton = $('[style*="display: block;"] .button-container > a');
-    // Selector propuesto
     this.productListButton = $('.button-container .btn.btn-default.button.button-medium');
   }
 

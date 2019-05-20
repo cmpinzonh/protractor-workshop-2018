@@ -4,9 +4,7 @@ export class AddToCartPage {
   private addToCartButton: ElementFinder;
 
   constructor () {
-    // this.addToCartButton = $('#center_column a.button.ajax_add_to_cart_button.btn.btn-default');
-    // Selector propuesto
-    this.addToCartButton = $('a.button.ajax_add_to_cart_button.btn.btn-default');
+    this.addToCartButton = $('a.button.ajax_add_to_cart_button');
   }
 
   public async addToCart(): Promise<void> {

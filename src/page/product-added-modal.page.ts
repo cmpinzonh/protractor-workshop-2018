@@ -4,7 +4,7 @@ export class AddToCartPage {
   private addToCartButton: ElementFinder;
 
   constructor () {
-    this.addToCartButton = $('a.button.ajax_add_to_cart_button');
+    this.addToCartButton = $('[title = "Add to cart"]');
   }
 
   public async addToCart(): Promise<void> {

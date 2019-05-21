@@ -1,10 +1,11 @@
-import { $, ElementFinder, browser, ExpectedConditions } from 'protractor';
+import { by, ElementFinder, browser, ExpectedConditions, element } from 'protractor';
 
 export class ProductListPage {
   private productListButton: ElementFinder;
 
   constructor () {
-    this.productListButton = $('[style*="display: block;"] .button-container > a');
+    this.productListButton = element(
+      by.cssContainingText('.button-container a', 'Proceed to checkout'));
   }
 
   public async goToCheckout(): Promise<void> {

@@ -4,7 +4,7 @@ export class AddressStepPage {
   private addressStepButton: ElementFinder;
 
   constructor () {
-    this.addressStepButton = $('#center_column > form > p > button > span');
+    this.addressStepButton = $('[name = "processAddress"]');
   }
 
   public async selectAddress(): Promise<void> {

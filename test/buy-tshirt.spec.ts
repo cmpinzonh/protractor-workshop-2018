@@ -3,6 +3,16 @@ import { MenuContentPage, AddToCartPage, ProductListPage, OrderSummaryPage,
         SignInStepPage, AddressStepPage, ShippingStepPage,
         BankPaymentStepPage, PaymentStepPage, SummaryStepPage } from '../src/page';
 
+const menuContentPage: MenuContentPage = new MenuContentPage();
+const addToCartPage: AddToCartPage = new AddToCartPage();
+const productListPage: ProductListPage = new ProductListPage();
+const orderSummaryPage: OrderSummaryPage = new OrderSummaryPage();
+const signInStep: SignInStepPage = new SignInStepPage();
+const addressStepPage: AddressStepPage = new AddressStepPage();
+const shippingStepPage: ShippingStepPage = new ShippingStepPage();
+const bankPaymentStepPage: BankPaymentStepPage = new BankPaymentStepPage();
+const paymentStepPage: PaymentStepPage = new PaymentStepPage();
+const summaryStep: SummaryStepPage = new SummaryStepPage();
 describe('Given a shopping page', () => {
   beforeAll(async () => {
     await browser.get('http://automationpractice.com/');
@@ -10,11 +20,6 @@ describe('Given a shopping page', () => {
 
   describe('When looking to buy a tshirt', () => {
     beforeAll(async () => {
-      const menuContentPage: MenuContentPage = new MenuContentPage();
-      const addToCartPage: AddToCartPage = new AddToCartPage();
-      const productListPage: ProductListPage = new ProductListPage();
-      const orderSummaryPage: OrderSummaryPage = new OrderSummaryPage();
-
       await menuContentPage.goToTShirtMenu();
       await addToCartPage.addToCart();
       await productListPage.goToCheckout();
@@ -23,7 +28,6 @@ describe('Given a shopping page', () => {
 
     describe('and login into the app', () => {
       beforeAll(async () => {
-        const signInStep: SignInStepPage = new SignInStepPage();
 
         await $('#email').sendKeys('aperdomobo@gmail.com');
         await $('#passwd').sendKeys('WorkshopProtractor');
@@ -32,16 +36,12 @@ describe('Given a shopping page', () => {
 
       describe('and select an address', () => {
         beforeAll(async () => {
-          const addressStepPage: AddressStepPage = new AddressStepPage();
 
           await addressStepPage.selectAddress();
         });
 
         describe('and select a payment method', () => {
           beforeAll(async () => {
-            const shippingStepPage: ShippingStepPage = new ShippingStepPage();
-            const bankPaymentStepPage: BankPaymentStepPage = new BankPaymentStepPage();
-            const paymentStepPage: PaymentStepPage = new PaymentStepPage();
 
             await shippingStepPage.selectShipping();
             await bankPaymentStepPage.selectBankPayment();
@@ -49,7 +49,6 @@ describe('Given a shopping page', () => {
           });
 
           it('the order should be complete', async () => {
-            const summaryStep: SummaryStepPage = new SummaryStepPage();
 
             expect(await summaryStep.confirmOrder())
             .toBe('Your order on My Store is complete.');

@@ -30,24 +30,30 @@ describe('Given a shopping page', () => {
         await signInStep.signIn();
       });
 
-      describe('and select a payment method', () => {
+      describe('and select an address', () => {
         beforeAll(async () => {
           const addressStepPage: AddressStepPage = new AddressStepPage();
-          const shippingStepPage: ShippingStepPage = new ShippingStepPage();
-          const bankPaymentStepPage: BankPaymentStepPage = new BankPaymentStepPage();
-          const paymentStepPage: PaymentStepPage = new PaymentStepPage();
 
           await addressStepPage.selectAddress();
-          await shippingStepPage.selectShipping();
-          await bankPaymentStepPage.selectBankPayment();
-          await paymentStepPage.confirmOrder();
         });
 
-        it('the order should be complete', async () => {
-          const summaryStep: SummaryStepPage = new SummaryStepPage();
+        describe('and select a payment method', () => {
+          beforeAll(async () => {
+            const shippingStepPage: ShippingStepPage = new ShippingStepPage();
+            const bankPaymentStepPage: BankPaymentStepPage = new BankPaymentStepPage();
+            const paymentStepPage: PaymentStepPage = new PaymentStepPage();
 
-          expect(await summaryStep.confirmOrder())
-          .toBe('Your order on My Store is complete.');
+            await shippingStepPage.selectShipping();
+            await bankPaymentStepPage.selectBankPayment();
+            await paymentStepPage.confirmOrder();
+          });
+
+          it('the order should be complete', async () => {
+            const summaryStep: SummaryStepPage = new SummaryStepPage();
+
+            expect(await summaryStep.confirmOrder())
+            .toBe('Your order on My Store is complete.');
+          });
         });
       });
     });

@@ -3,42 +3,58 @@ import { MenuContentPage, AddToCartPage, ProductListPage, OrderSummaryPage,
         SignInStepPage, AddressStepPage, ShippingStepPage,
         BankPaymentStepPage, PaymentStepPage, SummaryStepPage } from '../src/page';
 
-describe('Buy a t-shirt', () => {
-  const menuContentPage: MenuContentPage = new MenuContentPage();
-  const addToCartPage: AddToCartPage = new AddToCartPage();
-  const productListPage: ProductListPage = new ProductListPage();
-  const orderSummaryPage: OrderSummaryPage = new OrderSummaryPage();
-  const signInStep: SignInStepPage = new SignInStepPage();
-  const addressStepPage: AddressStepPage = new AddressStepPage();
-  const shippingStepPage: ShippingStepPage = new ShippingStepPage();
-  const bankPaymentStepPage: BankPaymentStepPage = new BankPaymentStepPage();
-  const paymentStepPage: PaymentStepPage = new PaymentStepPage();
-  const summaryStep: SummaryStepPage = new SummaryStepPage();
-
-  it('then should be bought a t-shirt', async () => {
+const menuContentPage: MenuContentPage = new MenuContentPage();
+const addToCartPage: AddToCartPage = new AddToCartPage();
+const productListPage: ProductListPage = new ProductListPage();
+const orderSummaryPage: OrderSummaryPage = new OrderSummaryPage();
+const signInStep: SignInStepPage = new SignInStepPage();
+const addressStepPage: AddressStepPage = new AddressStepPage();
+const shippingStepPage: ShippingStepPage = new ShippingStepPage();
+const bankPaymentStepPage: BankPaymentStepPage = new BankPaymentStepPage();
+const paymentStepPage: PaymentStepPage = new PaymentStepPage();
+const summaryStep: SummaryStepPage = new SummaryStepPage();
+describe('Given a shopping page', () => {
+  beforeAll(async () => {
     await browser.get('http://automationpractice.com/');
+  });
 
-    await menuContentPage.goToTShirtMenu();
+  describe('When looking to buy a tshirt', () => {
+    beforeAll(async () => {
+      await menuContentPage.goToTShirtMenu();
+      await addToCartPage.addToCart();
+      await productListPage.goToCheckout();
+      await orderSummaryPage.proceedToCheckout();
+    });
 
-    await addToCartPage.addToCart();
+    describe('and login into the app', () => {
+      beforeAll(async () => {
 
-    await productListPage.goToCheckout();
+        await $('#email').sendKeys('aperdomobo@gmail.com');
+        await $('#passwd').sendKeys('WorkshopProtractor');
+        await signInStep.signIn();
+      });
 
-    await orderSummaryPage.proceedToCheckout();
+      describe('and select an address', () => {
+        beforeAll(async () => {
 
-    await $('#email').sendKeys('aperdomobo@gmail.com');
-    await $('#passwd').sendKeys('WorkshopProtractor');
-    await signInStep.signIn();
+          await addressStepPage.selectAddress();
+        });
 
-    await addressStepPage.selectAddress();
+        describe('and select a payment method', () => {
+          beforeAll(async () => {
 
-    await shippingStepPage.selectShipping();
+            await shippingStepPage.selectShipping();
+            await bankPaymentStepPage.selectBankPayment();
+            await paymentStepPage.confirmOrder();
+          });
 
-    await bankPaymentStepPage.selectBankPayment();
+          it('the order should be complete', async () => {
 
-    await paymentStepPage.confirmOrder();
-
-    expect(await summaryStep.confirmOrder())
-      .toBe('Your order on My Store is complete.');
+            expect(await summaryStep.confirmOrder())
+            .toBe('Your order on My Store is complete.');
+          });
+        });
+      });
+    });
   });
 });

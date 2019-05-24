@@ -21,7 +21,7 @@ describe('Given a shopping page', () => {
   describe('When looking to buy a tshirt', () => {
     beforeAll(async () => {
       await menuContentPage.goToTShirtMenu();
-      await addToCartPage.addToCart();
+      await addToCartPage.addToCart('Faded Short Sleeve T-shirts');
       await productListPage.goToCheckout();
       await orderSummaryPage.proceedToCheckout();
     });

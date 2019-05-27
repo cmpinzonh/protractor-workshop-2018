@@ -21,7 +21,7 @@ export class PersonalInformationPage {
     this.firstNameField = element(by.name('firstname'));
     this.lastNameField = element(by.name('lastname'));
     this.sendButton = element(by.id('submit'));
-    this.pageTitleLabel = element(by.id('content')).element(by.tagName('h1'));
+    this.pageTitleLabel = element(by.css('#content h1'));
   }
 
   private sexOption(sex: string): ElementFinder {

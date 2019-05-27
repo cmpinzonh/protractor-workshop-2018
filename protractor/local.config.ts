@@ -13,5 +13,12 @@ export const config: Config = {
     browser.manage().timeouts().implicitlyWait(0);
     reporter();
     browser.ignoreSynchronization = true;
+  },
+  capabilities: {
+    browserName: 'chrome',
+    chromeOptions: {
+      args: ['--disable-popup-blocking', '--no-default-browser-check', '--window-size=800,600'],
+      prefs: { credentials_enable_service: false }
+    }
   }
 };

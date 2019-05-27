@@ -4,8 +4,6 @@ export class BankPaymentStepPage {
   private bankPaymentButton: ElementFinder;
 
   constructor () {
-    // this.bankPaymentButton = $('#HOOK_PAYMENT > div:nth-child(1) > div > p > a');
-    // Selector propuesto
     this.bankPaymentButton = $('.bankwire');
   }
 

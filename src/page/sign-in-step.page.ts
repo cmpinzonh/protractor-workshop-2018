@@ -1,12 +1,10 @@
-import { $, ElementFinder, browser, ExpectedConditions } from 'protractor';
+import { ElementFinder, browser, ExpectedConditions, element, by } from 'protractor';
 
 export class SignInStepPage {
   private signInButton: ElementFinder;
 
   constructor () {
-    // this.signInButton = $('#SubmitLogin > span');
-    // Selector propuesto
-    this.signInButton = $('#SubmitLogin');
+    this.signInButton = element(by.id('SubmitLogin'));
   }
 
   public async signIn(): Promise<void> {

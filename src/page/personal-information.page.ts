@@ -24,27 +24,27 @@ export class PersonalInformationPage {
     this.pageTitleLabel = element(by.css('#content h1'));
   }
 
-  private sexOption(sex: string): ElementFinder {
+  private getSexOption(sex: string): ElementFinder {
     return element(by.css(`[name="sex"][value="${sex}"]`));
   }
 
-  private experienceOption(years: number): ElementFinder {
+  private getExperienceRadioButton(years: number): ElementFinder {
     return element(by.css(`[name="exp"][value="${years}"]`));
   }
 
-  private professionOption(profession: string): ElementFinder {
+  private getProfessionRadioButton(profession: string): ElementFinder {
     return element(by.css(`[name="profession"][value="${profession}"]`));
   }
 
-  private toolsOption(tool: string): ElementFinder {
+  private getToolsRadioButton(tool: string): ElementFinder {
     return element(by.css(`[name="tool"][value="${tool}"]`));
   }
 
-  private continentOption(continent: string): ElementFinder {
+  private getContinentChoice(continent: string): ElementFinder {
     return element(by.id('continents')).element(by.cssContainingText('option', continent));
   }
 
-  private seleniumCommandOption(command: string): ElementFinder {
+  private seleniumCommandsListChoice(command: string): ElementFinder {
     return element(by.id('selenium_commands')).element(by.cssContainingText('option', command));
   }
 
@@ -55,21 +55,21 @@ export class PersonalInformationPage {
   public async fillForm(form: PersonalInformation): Promise<void> {
     await this.firstNameField.sendKeys(form.firstName);
     await this.lastNameField.sendKeys(form.lastName);
-    await this.sexOption(form.sex).click();
-    await this.experienceOption(form.experience).click();
+    await this.getSexOption(form.sex).click();
+    await this.getExperienceRadioButton(form.experience).click();
 
-    for (const name of form.profession) {
-      await this.professionOption(name).click();
+    for (const profession of form.profession) {
+      await this.getProfessionRadioButton(profession).click();
     }
 
-    for (const name of form.tools) {
-      await this.toolsOption(name).click();
+    for (const tool of form.tools) {
+      await this.getToolsRadioButton(tool).click();
     }
 
-    await this.continentOption(form.continent).click();
+    await this.getContinentChoice(form.continent).click();
 
-    for (const name of form.commands) {
-      await this.seleniumCommandOption(name).click();
+    for (const commands of form.commands) {
+      await this.seleniumCommandsListChoice(commands).click();
     }
   }
 

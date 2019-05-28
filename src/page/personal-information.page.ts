@@ -44,7 +44,7 @@ export class PersonalInformationPage {
     return element(by.id('continents')).element(by.cssContainingText('option', continent));
   }
 
-  private seleniumCommandsListChoice(command: string): ElementFinder {
+  private getSeleniumCommand(command: string): ElementFinder {
     return element(by.id('selenium_commands')).element(by.cssContainingText('option', command));
   }
 
@@ -64,12 +64,13 @@ export class PersonalInformationPage {
 
     for (const tool of form.tools) {
       await this.getToolsRadioButton(tool).click();
+
     }
 
     await this.getContinentChoice(form.continent).click();
 
     for (const commands of form.commands) {
-      await this.seleniumCommandsListChoice(commands).click();
+      await this.getSeleniumCommand(commands).click();
     }
   }
 

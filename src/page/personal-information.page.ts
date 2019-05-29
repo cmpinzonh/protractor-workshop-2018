@@ -69,8 +69,8 @@ export class PersonalInformationPage {
 
     await this.getContinentChoice(form.continent).click();
 
-    for (const commands of form.commands) {
-      await this.getSeleniumCommand(commands).click();
+    for (const command of form.commands) {
+      await this.getSeleniumCommand(command).click();
     }
   }
 

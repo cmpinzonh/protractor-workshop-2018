@@ -8,7 +8,6 @@ export class SummaryStepPage {
   }
 
   public async confirmOrder(): Promise<string> {
-
     return this.confirmOrderText.getText();
   }
 }

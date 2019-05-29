@@ -1,19 +1,26 @@
-import { $, ElementFinder, browser, ExpectedConditions } from 'protractor';
+import { $$, ElementFinder, browser, ElementArrayFinder } from 'protractor';
 
 export class AddToCartPage {
-  private addToCartButton: ElementFinder;
+  private products: ElementArrayFinder;
 
   constructor () {
-    // this.addToCartButton = $('#center_column a.button.ajax_add_to_cart_button.btn.btn-default');
-    // Selector propuesto
-    this.addToCartButton = $('a.button.ajax_add_to_cart_button.btn.btn-default');
+    this.products = $$('.product-container');
   }
 
-  public async addToCart(): Promise<void> {
-    await browser.wait(
-      ExpectedConditions.elementToBeClickable(
-        this.addToCartButton),
-      3000);
-    await this.addToCartButton.click();
+  private findByProduct(productName: string): ElementFinder {
+    return this.products
+      .filter((item: ElementFinder) =>
+        item
+          .$('.product-name')
+          .getText()
+          .then((text: string) => text.includes(productName)))
+      .first();
+  }
+
+  public async addToCart(productName: string): Promise<void> {
+    const card = this.findByProduct(productName);
+
+    await browser.actions().mouseMove(card.$('img')).perform();
+    await card.$('[title = "Add to cart"]').click();
   }
 }

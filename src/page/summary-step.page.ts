@@ -4,8 +4,6 @@ export class SummaryStepPage {
   private confirmOrderText: ElementFinder;
 
   constructor () {
-    // this.confirmOrderText = $('#center_column > div > p > strong');
-    // Selector propuesto
     this.confirmOrderText = $('#center_column .dark');
   }
 

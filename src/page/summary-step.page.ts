@@ -1,4 +1,4 @@
-import { $, ElementFinder } from 'protractor';
+import { $, ElementFinder, browser, ExpectedConditions } from 'protractor';
 
 export class SummaryStepPage {
   private confirmOrderText: ElementFinder;
@@ -8,6 +8,10 @@ export class SummaryStepPage {
   }
 
   public async confirmOrder(): Promise<string> {
+    await browser.wait(
+      ExpectedConditions.textToBePresentInElement(
+        this.confirmOrderText, 'Your order on My Store is complete.'),
+      3000);
     return this.confirmOrderText.getText();
   }
 }

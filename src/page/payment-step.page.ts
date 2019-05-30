@@ -1,12 +1,11 @@
-import { $, ElementFinder, browser, ExpectedConditions } from 'protractor';
+import { element, by, ElementFinder, browser, ExpectedConditions } from 'protractor';
 
 export class PaymentStepPage {
   private confirmOrderButton: ElementFinder;
 
   constructor () {
-    // this.confirmOrderButton = $('#cart_navigation > button > span');
-    // Selector propuesto
-    this.confirmOrderButton = $('.cart_navigation .btn.button-medium');
+    this.confirmOrderButton = element(
+      by.cssContainingText('.button-medium', 'I confirm my order'));
   }
 
   public async confirmOrder(): Promise<void> {

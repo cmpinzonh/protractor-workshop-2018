@@ -1,5 +1,7 @@
 import { browser } from 'protractor';
-import { IFramePage, PersonalInformationPage } from '../src/page';
+
+import { IFramePage } from '../src/page';
+
 
 describe('Given a page with Iframes', () => {
   const iframe = new IFramePage();

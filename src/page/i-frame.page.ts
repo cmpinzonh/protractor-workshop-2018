@@ -2,6 +2,7 @@ import { $, browser, ElementFinder, promise } from 'protractor';
 
 export class IFramePage {
   private frame: ElementFinder;
+
   private documentTitleLabel: ElementFinder;
   constructor() {
     this.documentTitleLabel = $('#content h1');
@@ -18,7 +19,7 @@ export class IFramePage {
 
     return Number(height);
   }
-
+  
   public async getTitle(): Promise<string> {
     return await this.documentTitleLabel.getText();
   }
@@ -30,4 +31,5 @@ export class IFramePage {
   public async switchToMainPage(): Promise<void> {
     await browser.switchTo().defaultContent();
   }
+
 }

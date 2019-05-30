@@ -1,7 +1,6 @@
 import { browser } from 'protractor';
 
-import { IFramePage } from '../src/page';
-
+import { IFramePage, PersonalInformationPage } from '../src/page';
 
 describe('Given a page with Iframes', () => {
   const iframe = new IFramePage();
@@ -29,7 +28,7 @@ describe('Given a page with Iframes', () => {
         await iframe.switchToFrame();
       });
 
-      it('then should be have other title', async () => {
+      it('then there should be have other title', async () => {
         expect(await personalInformationPage.getPageTitle()).toBe('Automation Tools Tutorial');
       });
 
@@ -38,7 +37,7 @@ describe('Given a page with Iframes', () => {
           await iframe.switchToMainPage();
         });
 
-        it('then should be a title', async () => {
+        it('then  there should be a title', async () => {
           expect(await iframe.getTitle()).toBe('Sample Iframe page');
         });
       });

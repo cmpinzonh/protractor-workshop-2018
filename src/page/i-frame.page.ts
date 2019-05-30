@@ -19,7 +19,7 @@ export class IFramePage {
 
     return Number(height);
   }
-  
+
   public async getTitle(): Promise<string> {
     return await this.documentTitleLabel.getText();
   }

@@ -1,4 +1,7 @@
-import { element, by, ElementFinder } from 'protractor';
+import { browser, element, by, ElementFinder } from 'protractor';
+import { resolve } from 'path';
+import { existsSync } from 'fs';
+import * as remote from 'selenium-webdriver/remote';
 
 interface PersonalInformation {
   firstName: string;
@@ -9,6 +12,7 @@ interface PersonalInformation {
   tools: string[];
   continent: string;
   commands: string[];
+  file?: string;
 }
 
 export class PersonalInformationPage {
@@ -16,31 +20,33 @@ export class PersonalInformationPage {
   private lastNameField: ElementFinder;
   private sendButton: ElementFinder;
   private pageTitleLabel: ElementFinder;
+  private uploadFileInput: ElementFinder;
 
   constructor() {
     this.firstNameField = element(by.name('firstname'));
     this.lastNameField = element(by.name('lastname'));
     this.sendButton = element(by.id('submit'));
-    this.pageTitleLabel = element(by.css('#content h1'));
+    this.pageTitleLabel = element(by.id('content')).element(by.tagName('h1'));
+    this.uploadFileInput = element(by.id('photo'));
   }
 
-  private getSexOption(sex: string): ElementFinder {
+  private getSex(sex: string): ElementFinder {
     return element(by.css(`[name="sex"][value="${sex}"]`));
   }
 
-  private getExperienceRadioButton(years: number): ElementFinder {
+  private getExperience(years: number): ElementFinder {
     return element(by.css(`[name="exp"][value="${years}"]`));
   }
 
-  private getProfessionRadioButton(profession: string): ElementFinder {
+  private getProfession(profession: string): ElementFinder {
     return element(by.css(`[name="profession"][value="${profession}"]`));
   }
 
-  private getToolsRadioButton(tool: string): ElementFinder {
+  private getTool(tool: string): ElementFinder {
     return element(by.css(`[name="tool"][value="${tool}"]`));
   }
 
-  private getContinentChoice(continent: string): ElementFinder {
+  private getContinent(continent: string): ElementFinder {
     return element(by.id('continents')).element(by.cssContainingText('option', continent));
   }
 
@@ -52,22 +58,40 @@ export class PersonalInformationPage {
     return await this.pageTitleLabel.getText();
   }
 
+  public async getFilename(): Promise<string> {
+    const fullPath: string = await this.uploadFileInput.getAttribute('value');
+    return fullPath.split(/(\\|\/)/g).pop();
+  }
+
+  private async uploadFile(relativePath: string): Promise<void> {
+    const fullPath = resolve(process.cwd(), relativePath);
+
+    if (existsSync(fullPath)) {
+      await browser.setFileDetector(new remote.FileDetector());
+      await this.uploadFileInput.sendKeys(fullPath);
+      await browser.setFileDetector(undefined);
+    }
+  }
+
   public async fillForm(form: PersonalInformation): Promise<void> {
     await this.firstNameField.sendKeys(form.firstName);
     await this.lastNameField.sendKeys(form.lastName);
-    await this.getSexOption(form.sex).click();
-    await this.getExperienceRadioButton(form.experience).click();
+    await this.getSex(form.sex).click();
+    await this.getExperience(form.experience).click();
 
-    for (const profession of form.profession) {
-      await this.getProfessionRadioButton(profession).click();
+    for (const name of form.profession) {
+      await this.getProfession(name).click();
     }
 
-    for (const tool of form.tools) {
-      await this.getToolsRadioButton(tool).click();
-
+    if (form.file) {
+      await this.uploadFile(form.file);
     }
 
-    await this.getContinentChoice(form.continent).click();
+    for (const name of form.tools) {
+      await this.getTool(name).click();
+    }
+
+    await this.getContinent(form.continent).click();
 
     for (const command of form.commands) {
       await this.getSeleniumCommand(command).click();

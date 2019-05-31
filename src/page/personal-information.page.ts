@@ -79,16 +79,16 @@ export class PersonalInformationPage {
     await this.getSex(form.sex).click();
     await this.getExperience(form.experience).click();
 
-    for (const name of form.profession) {
-      await this.getProfession(name).click();
+    for (const profession of form.profession) {
+      await this.getProfession(profession).click();
     }
 
     if (form.file) {
       await this.uploadFile(form.file);
     }
 
-    for (const name of form.tools) {
-      await this.getTool(name).click();
+    for (const tool of form.tools) {
+      await this.getTool(tool).click();
     }
 
     await this.getContinent(form.continent).click();

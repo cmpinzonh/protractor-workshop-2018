@@ -30,23 +30,23 @@ export class PersonalInformationPage {
     this.uploadFileInput = element(by.id('photo'));
   }
 
-  private getSex(sex: string): ElementFinder {
+  private getSexOption(sex: string): ElementFinder {
     return element(by.css(`[name="sex"][value="${sex}"]`));
   }
 
-  private getExperience(years: number): ElementFinder {
+  private getExperienceRadioButton(years: number): ElementFinder {
     return element(by.css(`[name="exp"][value="${years}"]`));
   }
 
-  private getProfession(profession: string): ElementFinder {
+  private getProfessionRadioButton(profession: string): ElementFinder {
     return element(by.css(`[name="profession"][value="${profession}"]`));
   }
 
-  private getTool(tool: string): ElementFinder {
+  private getToolRadioButton(tool: string): ElementFinder {
     return element(by.css(`[name="tool"][value="${tool}"]`));
   }
 
-  private getContinent(continent: string): ElementFinder {
+  private getContinentChoice(continent: string): ElementFinder {
     return element(by.id('continents')).element(by.cssContainingText('option', continent));
   }
 
@@ -76,11 +76,11 @@ export class PersonalInformationPage {
   public async fillForm(form: PersonalInformation): Promise<void> {
     await this.firstNameField.sendKeys(form.firstName);
     await this.lastNameField.sendKeys(form.lastName);
-    await this.getSex(form.sex).click();
-    await this.getExperience(form.experience).click();
+    await this.getSexOption(form.sex).click();
+    await this.getExperienceRadioButton(form.experience).click();
 
     for (const profession of form.profession) {
-      await this.getProfession(profession).click();
+      await this.getProfessionRadioButton(profession).click();
     }
 
     if (form.file) {
@@ -88,10 +88,10 @@ export class PersonalInformationPage {
     }
 
     for (const tool of form.tools) {
-      await this.getTool(tool).click();
+      await this.getToolRadioButton(tool).click();
     }
 
-    await this.getContinent(form.continent).click();
+    await this.getContinentChoice(form.continent).click();
 
     for (const command of form.commands) {
       await this.getSeleniumCommand(command).click();

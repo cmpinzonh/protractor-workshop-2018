@@ -1,4 +1,4 @@
-import { $, browser } from 'protractor';
+import { browser } from 'protractor';
 import { MenuContentPage, AddToCartPage, ProductListPage, OrderSummaryPage,
         SignInStepPage, AddressStepPage, ShippingStepPage,
         BankPaymentStepPage, PaymentStepPage, SummaryStepPage } from '../src/page';
@@ -28,10 +28,7 @@ describe('Given a shopping page', () => {
 
     describe('and login into the app', () => {
       beforeAll(async () => {
-
-        await $('#email').sendKeys('aperdomobo@gmail.com');
-        await $('#passwd').sendKeys('WorkshopProtractor');
-        await signInStep.signIn();
+        await signInStep.signIn('aperdomobo@gmail.com', 'WorkshopProtractor');
       });
 
       describe('and select an address', () => {
